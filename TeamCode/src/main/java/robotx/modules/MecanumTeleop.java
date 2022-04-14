@@ -106,8 +106,8 @@ public final class MecanumTeleop extends XModule{
         if (xGamepad2().start.wasPressed()){
             toggleSlow();
         }
-
-        double xPow = -1 * controlRamp( xGamepad1().left_stick_x); // Negate the left stick value because negative is right. Negating it will make negative left, as we want
+        double xPow = -1 * controlRamp( xGamepad1().left_stick_x); // Negate the le
+ft stick value because negative is right. Negating it will make negative left, as we want
         double yPow = controlRamp(xGamepad1().left_stick_y);
         double rotPow = -1 *  controlRamp(xGamepad1().right_stick_x); //again, negate because negative is right
 
