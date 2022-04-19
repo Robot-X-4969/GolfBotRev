@@ -18,6 +18,8 @@ public class GolfMotorServo extends XModule {
     double power2 = .4;
 
     public boolean slowMode = false;
+    boolean closed2 = true;
+    boolean closed = true;
 
     public GolfMotorServo (OpMode op){
         super(op);
@@ -40,6 +42,27 @@ public class GolfMotorServo extends XModule {
             slowMode = true;
         }
     }
+    public void LiftServo() {
+        if (!closed2) {
+            liftServo.setPosition(1);
+            closed2 = true;
+        } else {
+            liftServo.setPosition(0.7);
+            closed2 = false;
+        }
+    }
+    public void DropperServo() {
+        if (!closed2) {
+            dropperServo.setPosition(0.5);
+            closed2 = true;
+        } else {
+            dropperServo.setPosition(0.07);
+            closed2 = false;
+        }
+    }
+
+
+
 
 
 
@@ -84,18 +107,12 @@ public class GolfMotorServo extends XModule {
         }
 
         if (xGamepad2().right_stick_button.wasPressed()){
-            liftServo.setPosition(1);
-
-        }
-        if (xGamepad2().left_stick_button.wasPressed()){
-            liftServo.setPosition(.7);
+            LiftServo();
         }
         if (xGamepad2().right_bumper.wasPressed()){
-            dropperServo.setPosition(.5);
+            DropperServo();
         }
-        if (xGamepad2().left_bumper.wasPressed()){
-            dropperServo.setPosition(.07);
-        }
+
 
 
     }
