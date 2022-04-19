@@ -43,12 +43,12 @@ public class GolfMotorServo extends XModule {
         }
     }
     public void LiftServo() {
-        if (!closed2) {
+        if (!closed) {
             liftServo.setPosition(1);
-            closed2 = true;
+            closed = true;
         } else {
             liftServo.setPosition(0.7);
-            closed2 = false;
+            closed = false;
         }
     }
     public void DropperServo() {
@@ -60,11 +60,6 @@ public class GolfMotorServo extends XModule {
             closed2 = false;
         }
     }
-
-
-
-
-
 
     public void loop() {
         if (xGamepad2().start.wasPressed()){
