@@ -1,5 +1,8 @@
 package robotx.modules;
 
+import android.view.KeyEvent;
+
+
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -60,12 +63,10 @@ public class GolfMotorServo extends XModule {
             closed2 = false;
         }
     }
-
     public void loop() {
         if (xGamepad2().start.wasPressed()){
             toggleSlow();
         }
-
 
         if (xGamepad2().x.isDown()) {
             if (slowMode){
@@ -107,8 +108,5 @@ public class GolfMotorServo extends XModule {
         if (xGamepad2().right_bumper.wasPressed()){
             DropperServo();
         }
-
-
-
     }
 }
