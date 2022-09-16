@@ -6,6 +6,7 @@ import robotx.libraries.XOpMode;
 import robotx.modules.GolfMotorServo;
 import robotx.modules.MecanumTeleop;
 import robotx.modules.OrientationDrive;
+import robotx.modules.VeryImportantTestDONTDELETE;
 
 @TeleOp(name = "GolfBotOpMode", group = "Default")
 
@@ -14,6 +15,7 @@ public class OpMode2021v2 extends XOpMode {
     OrientationDrive orientationDrive;
     GolfMotorServo golfMotorServo;
     MecanumTeleop mecanumTeleop;
+    VeryImportantTestDONTDELETE importantStuff;
 
     public void initModules() {                                                                 
 
@@ -27,6 +29,10 @@ public class OpMode2021v2 extends XOpMode {
 
         orientationDrive = new OrientationDrive(this);
         activeModules.add(orientationDrive);
+
+        importantStuff = new VeryImportantTestDONTDELETE(this);
+        activeModules.add(importantStuff);
+
 
     }
 

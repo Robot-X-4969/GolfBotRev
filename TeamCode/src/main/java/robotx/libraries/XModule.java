@@ -13,6 +13,10 @@ public abstract class XModule {
         opMode = op;
     }
 
+    public XModule() {
+
+    }
+
     public XGamepad xGamepad1() {
         if (opMode instanceof XOpMode) {
             return ((XOpMode) opMode).xGamepad1;
