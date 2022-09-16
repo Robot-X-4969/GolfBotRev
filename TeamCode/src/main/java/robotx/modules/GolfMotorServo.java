@@ -16,35 +16,37 @@ public class GolfMotorServo extends XModule {
 
     Servo liftServo;
     Servo dropperServo;
+    Servo pushServo;
 
     double power = .7;
     double power2 = .4;
 
     public boolean slowMode = false;
+    boolean touched = false;
+    boolean closed3 = true;
     boolean closed2 = true;
     boolean closed = true;
 
-    public GolfMotorServo (OpMode op){
+    public GolfMotorServo(OpMode op) {
         super(op);
     }
 
     public void init() {
         liftMotor = opMode.hardwareMap.dcMotor.get("LiftMotor");
         dropperMotor = opMode.hardwareMap.dcMotor.get("DropperMotor");
-
+        pushServo = opMode.hardwareMap.servo.get("PushMotor");
         liftServo = opMode.hardwareMap.servo.get("liftServo");
         dropperServo = opMode.hardwareMap.servo.get("DropperServo");
     }
 
-    public void toggleSlow(){
-        if (slowMode){
+    public void toggleSlow() {
+        if (slowMode) {
             slowMode = false;
-        }
-
-        else {
+        } else {
             slowMode = true;
         }
     }
+
     public void LiftServo() {
         if (!closed) {
             liftServo.setPosition(1);
@@ -54,6 +56,7 @@ public class GolfMotorServo extends XModule {
             closed = false;
         }
     }
+
     public void DropperServo() {
         if (!closed2) {
             dropperServo.setPosition(0.5);
@@ -63,6 +66,18 @@ public class GolfMotorServo extends XModule {
             closed2 = false;
         }
     }
+
+    public void PushServo() {
+        if (!closed3) {
+            pushServo.setPosition(.75);
+            closed3 = true;
+        } else {
+            pushServo.setPosition(.25);
+            closed3 = false;
+        }
+    }
+
+
     public void loop() {
         if (xGamepad2().start.wasPressed()){
             toggleSlow();
