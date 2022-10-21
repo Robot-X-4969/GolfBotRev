@@ -1,7 +1,5 @@
 package robotx.modules;
 
-
-
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -29,8 +27,6 @@ public class DuckRotation extends XModule {
         }
     }
 
-
-
     public DuckRotation (OpMode op) {
         super(op);
     }
@@ -42,8 +38,6 @@ public class DuckRotation extends XModule {
         duckServo = opMode.hardwareMap.servo.get("duckServo");
 
     }
-
-
 
     public void loop() {
         if (xGamepad2().right_bumper.isDown()){
@@ -61,11 +55,9 @@ public class DuckRotation extends XModule {
         if (xGamepad2().right_stick_button.wasPressed()) {
             blockServo();
         }
-
-
-
     }
 }
+
 //Open: 0.1
 //Close: 0.267
 
