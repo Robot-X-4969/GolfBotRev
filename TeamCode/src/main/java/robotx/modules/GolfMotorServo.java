@@ -5,6 +5,7 @@ import android.view.KeyEvent;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DigitalChannel;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import robotx.libraries.XModule;
@@ -18,16 +19,21 @@ public class GolfMotorServo extends XModule {
     Servo dropperServo;
     Servo pushServo;
     Servo plasticServo;
+    DigitalChannel liftTouch;
+    DigitalChannel upTouch;
+    DigitalChannel downTouch;
 
     double power = .7;
     double power2 = .4;
 
     public boolean slowMode = false;
     boolean touched = false;
+    boolean upTouched = false;
+    boolean downTouched = false;
     boolean closed3 = true;
     boolean closed2 = true;
     boolean closed = true;
-    boolean lowered = true;
+    boolean pushed = true;
 
     public GolfMotorServo(OpMode op) {
         super(op);
@@ -40,6 +46,13 @@ public class GolfMotorServo extends XModule {
         liftServo = opMode.hardwareMap.servo.get("liftServo");
         dropperServo = opMode.hardwareMap.servo.get("DropperServo");
         plasticServo = opMode.hardwareMap.servo.get("PlasticServo");
+
+        liftTouch = opMode.hardwareMap.get(DigitalChannel.class, "liftTouch");
+        liftTouch.setMode(DigitalChannel.Mode.INPUT);
+        upTouch = opMode.hardwareMap.get(DigitalChannel.class, "upTouch");
+        upTouch.setMode(DigitalChannel.Mode.INPUT);
+        downTouch = opMode.hardwareMap.get(DigitalChannel.class, "downTouch");
+        downTouch.setMode(DigitalChannel.Mode.INPUT);
     }
 
     public void toggleSlow() {
@@ -87,6 +100,37 @@ public class GolfMotorServo extends XModule {
             toggleSlow();
         }
 
+        if (liftTouch.getState() == true){
+
+            liftMotor.setPower(0);
+            liftMotor.setPower(-0.3);
+            touched = false;
+        }
+
+        if (upTouch.getState() == true){
+
+            dropperMotor.setPower(0);
+            dropperMotor.setPower(0.3);
+            upTouched = false;
+
+        }
+
+        if (downTouch.getState() == true){
+
+            dropperMotor.setPower(0);
+            dropperMotor.setPower(-0.3);
+            downTouched = false;
+
+        }
+
+
+        if (liftTouch.getState() == true){
+
+            liftMotor.setPower(0);
+            liftMotor.setPower(-0.3);
+
+        }
+
         if (xGamepad2().x.isDown()) {
             if (slowMode){
                 liftMotor.setPower(power2 / 2);
@@ -128,12 +172,13 @@ public class GolfMotorServo extends XModule {
             DropperServo();
         }
         if (xGamepad2().dpad_up.wasPressed()) {
-            if (lowered) {
-                plasticServo.setPosition();
-                lowered = false;
+            if (pushed = true) {
+                plasticServo.setPosition(0.1);
+                pushed = false;
             }
             else{
-                plasticServo.setPosition();
+                plasticServo.setPosition(0.25);
+                pushed = true;
                 }
             }
         }
